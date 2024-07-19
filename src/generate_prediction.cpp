@@ -6,9 +6,7 @@ typedef long double ld;
 
 int main(int argc, char* argv[])
 {
-  ld lambda = atof(argv[1]);
-  ld mu = atof(argv[2]);
-  ld stddev = atof(argv[3]);
+  ld stddev = atof(argv[1]);
   
   srand(stddev * 10);
   default_random_engine generator;
@@ -27,5 +25,4 @@ int main(int argc, char* argv[])
       ld q = distribution(generator) * (d - r) + d;
       cout << p << " " << max(p, q) << " " << r << " " << d << " " << w << endl;
     }
-  cout << lambda << " " << mu << endl;
 }

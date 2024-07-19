@@ -1,6 +1,36 @@
-# 2022.0387
+![INFORMS Journal on Computing Logo](https://INFORMSJoC.github.io/logos/INFORMS_Journal_on_Computing_Header.jpg)
 
-This repository contains the code for the experiments described in the paper "A Novel Prediction Setup for Online Speed-Scaling" by A. Antoniadis, P. Jabbarzade, and G. Shahkarami.
+# A Novel Prediction Setup for Online Speed-Scaling
+
+This archive is distributed in association with the [INFORMS Journal on Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
+
+The software and data in this repository are a snapshot of the software and data that were used in the research reported on in the paper [A Novel Prediction Setup for Online Speed-Scaling](https://doi.org/10.1287/ijoc.2023.0257) by A. Antoniadis, P. Jabbarzade, and G. Shahkarami.
+
+## Cite
+
+To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
+
+https://doi.org/10.1287/ijoc.2022.0387
+
+https://doi.org/10.1287/ijoc.2022.0387.cd
+
+Below is the BibTex for citing this snapshot of the repository.
+
+```
+@misc{FengRMA2024,
+  author =        {A. Antoniadis, P. Jabbarzade, and G. Shahkarami},
+  publisher =     {INFORMS Journal on Computing},
+  title =         {A Novel Prediction Setup for Online Speed-Scaling},
+  year =          {2024},
+  doi =           {10.1287/ijoc.2022.0387.cd},
+  url =           {https://github.com/INFORMSJoC/2022.0387},
+  note =          {Available for download at https://github.com/INFORMSJoC/2022.0387},
+}  
+```
+
+## Description
+
+The goal of this repository is to demonstrate the efficiency of our algorithm for scheduling jobs with predictions.
 
 To run the experiments, we use data from [this source](https://ita.ee.lbl.gov/html/contrib/EPA-HTTP.html). 
 For more details, refer to the Data section below. 
@@ -32,10 +62,12 @@ We use the following command to generate 1000 jobs after compiling the modified 
     ./PrepareInput 0 4 1 1000 data/epa-http.txt jobs 10 > jobs-human-readable
 
 The `jobs` file can be used as input for running YDS and qOA, which are explained in the Running Algorithms section. 
-To generate predictions for jobs, which are crucial for running our algorithm, use the [generate_precition](src/generate_prediction.cpp) code with the following commands:
+To generate predictions for jobs, which are crucial for running our algorithm, use the [generate_precition](src/generate_prediction.cpp) script.
+The [generate_precition](src/generate_prediction.cpp) script takes the argument `<stddev>`, which is the standard deviation of the normal distribution used to generate predictions.
+In our paper, we set `stddev={0.01, 0.05, 0.1}`.
 
     g++ src/generate_prediction.cpp -o generate_prediction
-    ./generate_prediction mu lambda stddev < jobs-human-readable > jobs-with-prediction
+    ./generate_prediction <stddev> < jobs-human-readable > jobs-with-prediction
 
 ## Running Algorithms
 
@@ -44,10 +76,14 @@ Note that to run the YDS and qOA algorithms, in addition to the `YDS` and `qOA` 
 Do not forget to compile their modules using the makefile they provided.
 
 ### Our Algorithm
+The [SwP](src/SwP.cpp) algorithm takes two arguments: `<lambda>` and `<mu>`.
+More details on how these parameters affect the algorithm can be found in our paper.
+Note that we set `lambda={0, 0.1, 0.2, 0.3}` and `mu={0.1, 0.2, ···, 1}` to examine our algorithm.
+
 Compile and run the [SwP](src/SwP.cpp) code:
 
     g++ src/SwP.cpp -o SwP
-    ./SwP < jobs-with-prediction 
+    ./SwP <lambda> <mu> < jobs-with-prediction 
 
 The output is the energy consumption of our scheduling algorithm for the given input.
 
@@ -62,4 +98,3 @@ Run qOA with `q=1.667`, which is theoretically optimal for the worst case:
 
     ./qOA jobs 1000 qoa-output 1.667
     ./ComputeEnergy qoa-output qoa-energy-consumption 3
-

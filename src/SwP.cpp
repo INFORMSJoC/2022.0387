@@ -312,10 +312,12 @@ void run_SwP(vector<job> workloads, vector<job> jobs)
 int main()
 {
   // Read Input
+  lambda = atof(argv[1]);
+  mu = atof(argv[2]);
+
   cin>>n;
   for(int i=0;i<n;i++)
     cin>>p[i]>>q[i]>>r[i]>>d[i]>>w[i];
-  cin>>lambda>>mu;
   // Step 1: shrink predictions
   shrink_prediction();
   // Step 2: Run YDS on shrinked predictions
