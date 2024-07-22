@@ -4,7 +4,7 @@
 
 This archive is distributed in association with the [INFORMS Journal on Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
 
-The software and data in this repository are a snapshot of the software and data that were used in the research reported on in the paper [A Novel Prediction Setup for Online Speed-Scaling](https://doi.org/10.1287/ijoc.2023.0257) by A. Antoniadis, P. Jabbarzade, and G. Shahkarami.
+The software and data in this repository are a snapshot of the software and data that were used in the research reported on in the paper [A Novel Prediction Setup for Online Speed-Scaling](https://doi.org/10.1287/ijoc.2022.0387) by A. Antoniadis, P. Jabbarzade, and G. Shahkarami.
 
 ## Cite
 
