@@ -17,7 +17,7 @@ https://doi.org/10.1287/ijoc.2022.0387.cd
 Below is the BibTex for citing this snapshot of the repository.
 
 ```
-@misc{FengRMA2024,
+@misc{Antoniadis2024,
   author =        {A. Antoniadis, P. Jabbarzade, and G. Shahkarami},
   publisher =     {INFORMS Journal on Computing},
   title =         {A Novel Prediction Setup for Online Speed-Scaling},
